@@ -1,6 +1,6 @@
 package com.mmc.tiktaktoe;
 
-public class IDontKnowNameOfClass {
+public class IDontKnowNameOfClass implements TicsXXX {
 	Field[][] fields;
 	
 	public IDontKnowNameOfClass() {
@@ -15,8 +15,10 @@ public class IDontKnowNameOfClass {
 			fields[i] = new Field[3];
 			
 			for (int k = 0; k < 3; k++) {
-				fields[i][k] = new Field();
-				System.out.println(i + " " + k);
+				Field field = new Field();
+				field.setTic((i+1) + "" + (k+1));
+				fields[i][k] = field;
+				
 			}
 			
 		}
@@ -24,7 +26,12 @@ public class IDontKnowNameOfClass {
 	}
 	
 	public void chooseField() {
-		
+	
+	}
+
+	@Override
+	public Tic[][] getTics() {
+		return fields;
 	}
 	
 	
