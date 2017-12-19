@@ -3,7 +3,7 @@ package com.mmc.tiktaktoe;
 public class TicTacToeGame {
 
 	public static void main(String[] args) {
-		FieldManager fieldManager = new FieldManagerImpl();
+		Board fieldManager = new TicTacToeBoard();
 		TicPrinter printer = new Printer(fieldManager.getTics());
 		Checker checker = new TicChecker();
 			

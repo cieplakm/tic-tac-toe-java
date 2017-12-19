@@ -1,11 +1,11 @@
 package com.mmc.tiktaktoe;
 
 public class Printer implements TicPrinter {
-	Tic[][] ticksArray;
+	Cell[][] ticksArray;
 	
 	public static final String divider = "|";
 	
-	public Printer(Tic[][] ticksArray) {
+	public Printer(Cell[][] ticksArray) {
 		this.ticksArray = ticksArray;
 	}
 	
@@ -13,13 +13,13 @@ public class Printer implements TicPrinter {
 	public void print() {
 		int i = 0;
 		
-		for (Tic[] ta : ticksArray) {
+		for (Cell[] ta : ticksArray) {
 			
 			int k = 0;
-			for (Tic tic : ta ) {
+			for (Cell tic : ta ) {
 				
 				if (k < 3 && k > 0) System.out.print(divider);
-				System.out.print(tic.getTic());
+				System.out.print(tic.getTicTakToe());
 				k++;
 			}
 			

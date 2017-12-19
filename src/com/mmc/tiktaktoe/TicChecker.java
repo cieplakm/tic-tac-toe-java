@@ -2,8 +2,8 @@ package com.mmc.tiktaktoe;
 
 public class TicChecker implements Checker {
 
-	public boolean checkWin(FieldManager fieldManager) {
-		Tic[][] tickArray = fieldManager.getTics();
+	public boolean checkWin(Board fieldManager) {
+		Cell[][] tickArray = fieldManager.getTics();
 		
 		if (checkHorisontaly(tickArray)) return true;
 		if (checkVertically(tickArray)) return true;
@@ -12,12 +12,12 @@ public class TicChecker implements Checker {
 		return false;
 	}
 
-	private boolean checkCross(Tic[][] tickArray) {
-		if(tickArray[0][0].getTic().equals(tickArray[1][1].getTic()) && tickArray[2][2].getTic().equals(tickArray[1][1].getTic())) {
+	private boolean checkCross(Cell[][] tickArray) {
+		if(tickArray[0][0].getTicTakToe().equals(tickArray[1][1].getTicTakToe()) && tickArray[2][2].getTicTakToe().equals(tickArray[1][1].getTicTakToe())) {
 			return true;
 		}
 		
-		if(tickArray[0][2].getTic().equals(tickArray[1][1].getTic()) && tickArray[2][0].getTic().equals(tickArray[1][1].getTic())) {
+		if(tickArray[0][2].getTicTakToe().equals(tickArray[1][1].getTicTakToe()) && tickArray[2][0].getTicTakToe().equals(tickArray[1][1].getTicTakToe())) {
 			return true;
 		}
 		
@@ -25,10 +25,10 @@ public class TicChecker implements Checker {
 		return false;
 	}
 
-	private boolean checkVertically(Tic[][] tickArray) {
+	private boolean checkVertically(Cell[][] tickArray) {
 		for (int i = 0; i < tickArray.length; i++) {
 				
-			if( tickArray[0][i].getTic().equals( tickArray[1][i] ) && tickArray[1][i].getTic().equals( tickArray[2][i].getTic() ) ) {
+			if( tickArray[0][i].getTicTakToe().equals( tickArray[1][i] ) && tickArray[1][i].getTicTakToe().equals( tickArray[2][i].getTicTakToe() ) ) {
 				return true;
 			}
 						
@@ -38,9 +38,9 @@ public class TicChecker implements Checker {
 		
 	}
 
-	private boolean checkHorisontaly(Tic[][] tickArray) {
-		for (Tic[] array : tickArray) {
-			if( array[0].getTic().equals( array[1].getTic() )  &&  array[1].getTic().equals( array[2].getTic() ) ) {
+	private boolean checkHorisontaly(Cell[][] tickArray) {
+		for (Cell[] array : tickArray) {
+			if( array[0].getTicTakToe().equals( array[1].getTicTakToe() )  &&  array[1].getTicTakToe().equals( array[2].getTicTakToe() ) ) {
 				return true;
 			}
 		}

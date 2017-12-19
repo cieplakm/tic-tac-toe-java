@@ -1,5 +1,5 @@
 package com.mmc.tiktaktoe;
 
 public interface Checker {
-	boolean checkWin(FieldManager fieldManager);
+	boolean checkWin(Board fieldManager);
 }
