@@ -1,18 +1,16 @@
 package com.mmc.tiktaktoe;
 
 public class Printer implements TicPrinter {
-	String divider = "|";
-	public static void main(String[] args ) {
-		TicPrinter tp = new Printer();
-		tp.print(new IDontKnowNameOfClass().getTics());
+	Tic[][] ticksArray;
+	
+	public static final String divider = "|";
+	
+	public Printer(Tic[][] ticksArray) {
+		this.ticksArray = ticksArray;
 	}
-
-	public Printer() {
-		
-	}
-
+	
 	@Override
-	public void print(Tic[][] ticksArray) {
+	public void print() {
 		int i = 0;
 		
 		for (Tic[] ta : ticksArray) {
@@ -33,7 +31,8 @@ public class Printer implements TicPrinter {
 			i++;
 		}
 		
-		
+		System.out.println("");
+		System.out.println("");
 		
 	}
 	

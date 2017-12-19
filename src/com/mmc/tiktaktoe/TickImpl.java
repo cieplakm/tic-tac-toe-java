@@ -1,6 +1,6 @@
 package com.mmc.tiktaktoe;
 
-public class Field implements Tic{
+public class TickImpl implements Tic{
 	String choosedSign; // "x" or "o"
 	boolean used;
 	
