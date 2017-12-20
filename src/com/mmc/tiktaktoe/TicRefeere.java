@@ -10,8 +10,8 @@ public class TicRefeere implements Refeere {
 	List<Rule> rules;
 	private Cell[][] cells;
 	
-	public TicRefeere(Cell[][] cells) {
-		this.cells = cells;
+	public TicRefeere(Board board) {
+		this.cells = board.getCells();
 		rules = new ArrayList<>();
 	}
 

@@ -5,8 +5,8 @@ public class TicPrinter implements Printer {
 	
 	public static final String divider = "|";
 	
-	public TicPrinter(Cell[][] ticksArray) {
-		this.ticksArray = ticksArray;
+	public TicPrinter(Board board) {
+		this.ticksArray = board.getCells();
 	}
 	
 	@Override

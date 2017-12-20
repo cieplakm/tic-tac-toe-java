@@ -4,14 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Positioner {
+public class Positioner implements PostionGetter{
 	
 	private String getFromConsole() {
 		String answer;
 		
 		while(true) {
 			try {
-				answer = getAnswer();
+				answer = getFromUser();
 				
 				if(answer.length() != 2) {
 					System.out.println("z³a odpowed");
@@ -36,15 +36,20 @@ public class Positioner {
 		x = Integer.parseInt(positionsInString.substring(0, 1));
 		y = Integer.parseInt(positionsInString.substring(1, 2));
 		
-		return new Position(x,y);
+		return new CellPosition(x, y);
 	}
 	
-	public String getAnswer() throws IOException {
+	public String getFromUser() throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Input your choice: ");
         
         String s = br.readLine();
        
         return s;
+	}
+
+	@Override
+	public Position getPosition() {
+		return convertStringToPostition(getFromConsole());
 	}
 }

@@ -9,79 +9,102 @@ import com.mmc.tiktaktoe.rules.HorizontalRule;
 import com.mmc.tiktaktoe.rules.VerticalRule;
 
 public class TicTacToeGame {
+	Board board;
+	Refeere refeere;
+	Printer printer;
+	PostionGetter postionGetter;
+	Movement movement;
+	
+	TicTacToeGame(Board board, Refeere refeere, Printer printer, PostionGetter postionGetter){
+		this.board = board;
+		this.refeere = refeere;
+		this.printer = printer;
+		this.postionGetter = postionGetter;
+		
+		movement = new Movement(TicTacToeType.X);	
+	}
+	
+	
 
 	public static void main(String[] args) {
-		Board board = new TicTacToeBoard();
 		
-		Printer printer = new TicPrinter(board.getCells());
-		
-		Refeere refeere = new TicRefeere(board.getCells());
-		refeere.addRule(new HorizontalRule());
-		refeere.addRule(new VerticalRule());
-		refeere.addRule(new DiagonalRule());
+		while (true) {
+			Board board = new TicTacToeBoard();
 			
-		Movement movement = new Movement(TicTacToeType.X);	
-		
-		
-
-		
-		while(!board.isFull() && !refeere.isWin()) {
+			Refeere refeere = new TicRefeere(board);
+			refeere.addRule(new HorizontalRule());
+			refeere.addRule(new VerticalRule());
+			refeere.addRule(new DiagonalRule());
 			
+			Printer printer = new TicPrinter(board);
 			
+			PostionGetter postionGetter = new Positioner();
 			
-			if (movement.getMove() == TicTacToeType.X) {
-				String answer;
-				
-				
-				
-				
-				do {
-					
-					
-					
-					
-					
+			TicTacToeGame tg = new TicTacToeGame(board, refeere, printer,  postionGetter);
 			
-					
-					
-					
-					new Position(x,y);
-					
-					if( !board.getCells()[x][y].isUsed() ) {
-						board.setTicX(x, y);
-						break;
-					}
-					
-				} while( board.getCells()[x][y].isUsed() );
-				
-				System.out.println("moved");
-				movement.moved();
-				
-			}else {
-				
-				do {
-					 x = (int) (Math.random()*3);
-					 y = (int) (Math.random()*3);
-					
-					if( !board.getCells()[x][y].isUsed() ) {
-						board.setTicO(x, y);
-						break;
-					}
-					
-				}while( board.getCells()[x][y].isUsed() );
-				
-				System.out.println("moved");
-				movement.moved();
-			}
-			
-			
-			
-			printer.print();
+			tg.startGame();
 		}
 		
+	}
+	
+	
+	public void startGame() {
+		while(!board.isFull() && !refeere.isWin()) {
+					
+			if (movement.getMove() == TicTacToeType.X) {
+				moveX();
+			}else {
+				moveO();
+			}
+			
+			printer.print();
+				
+		}
+				
+				
 		System.out.println("KONIEC!");
+	}
+
+	private void moveO() {
+		Position position;
+		int x;
+		int y;
+		do {
+			 x = (int) (Math.random()*3);
+			 y = (int) (Math.random()*3);
+			 
+			 position = new CellPosition(x,y);
+			
+			if( !board.getCell(position).isUsed() ) {
+				board.setTicO(position);
+				break;
+			}
+			
+		}while( board.getCell(position).isUsed() );
+		
+		movement.moved();
 		
 	}
+
+	private void moveX() {
+		Position position;
+		do {
+			position = postionGetter.getPosition();
+			
+			if(!board.getCell(position).isUsed()) {
+				board.setTicX(position);
+				break;
+			}
+			
+		} while( board.getCell(position).isUsed() );
+		
+		
+		movement.moved();
+		
+	}
+	
+	
+	
 	
 	
 

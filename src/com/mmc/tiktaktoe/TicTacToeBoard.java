@@ -26,16 +26,6 @@ public class TicTacToeBoard implements Board {
 	}
 
 	@Override
-	public boolean setTicX(int i, int k) {
-		return cells[i][k].setAsX();
-	}
-
-	@Override
-	public boolean setTicO(int i, int k) {
-		return cells[i][k].setAsO();
-	}
-
-	@Override
 	public boolean isFull() {
 		for (Cell[] celllist : cells) {
 		
@@ -45,8 +35,23 @@ public class TicTacToeBoard implements Board {
 			
 		}
 		
-		
 		return true;
+	}
+
+	@Override
+	public Cell getCell(Position position) {
+		return cells[position.row()][position.col()];
+		
+	}
+
+	@Override
+	public boolean setTicX(Position position) {
+		return cells[position.row()][position.col()].setAsX();
+	}
+
+	@Override
+	public boolean setTicO(Position position) {
+		return cells[position.row()][position.col()].setAsO();
 	}
 	
 }
