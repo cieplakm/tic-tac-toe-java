@@ -9,13 +9,23 @@ public class Movement {
 	public TicTacToeType getMove() {
 		
 		if(actual == TicTacToeType.X) {
-			actual = TicTacToeType.O;
+			
 			return TicTacToeType.O;
 		}else {
-			actual = TicTacToeType.X;
+			
 			return TicTacToeType.X;
 		}
 		
+	}
+	
+	public void moved() {
+		if(actual == TicTacToeType.X) {
+			actual = TicTacToeType.O;
+			
+		}else {
+			actual = TicTacToeType.X;
+			
+		}
 	}
 	
 }

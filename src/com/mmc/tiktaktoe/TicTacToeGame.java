@@ -1,5 +1,9 @@
 package com.mmc.tiktaktoe;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import com.mmc.tiktaktoe.rules.DiagonalRule;
 import com.mmc.tiktaktoe.rules.HorizontalRule;
 import com.mmc.tiktaktoe.rules.VerticalRule;
@@ -17,17 +21,31 @@ public class TicTacToeGame {
 		refeere.addRule(new DiagonalRule());
 			
 		Movement movement = new Movement(TicTacToeType.X);	
-			
+		
+		
+
+		
 		while(!board.isFull() && !refeere.isWin()) {
-			System.out.println("is full : "+board.isFull());
-			int y, x;
+			
+			
 			
 			if (movement.getMove() == TicTacToeType.X) {
-		
+				String answer;
+				
+				
+				
+				
 				do {
 					
-					 x = (int) (Math.random()*3);
-					 y = (int) (Math.random()*3);
+					
+					
+					
+					
+			
+					
+					
+					
+					new Position(x,y);
 					
 					if( !board.getCells()[x][y].isUsed() ) {
 						board.setTicX(x, y);
@@ -36,8 +54,8 @@ public class TicTacToeGame {
 					
 				} while( board.getCells()[x][y].isUsed() );
 				
-				
-				
+				System.out.println("moved");
+				movement.moved();
 				
 			}else {
 				
@@ -52,14 +70,20 @@ public class TicTacToeGame {
 					
 				}while( board.getCells()[x][y].isUsed() );
 				
-				
+				System.out.println("moved");
+				movement.moved();
 			}
 			
+			
+			
 			printer.print();
-			
-			
 		}
 		
+		System.out.println("KONIEC!");
+		
 	}
+	
+	
+
 
 }
