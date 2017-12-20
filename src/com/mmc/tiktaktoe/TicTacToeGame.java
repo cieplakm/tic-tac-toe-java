@@ -12,14 +12,16 @@ public class TicTacToeGame {
 	Board board;
 	Refeere refeere;
 	Printer printer;
-	PostionGetter postionGetter;
+	PostionGetter postionGetterO;
+	PostionGetter postionGetterX;
 	Movement movement;
 	
-	TicTacToeGame(Board board, Refeere refeere, Printer printer, PostionGetter postionGetter){
+	TicTacToeGame(Board board, Refeere refeere, Printer printer, PostionGetter postionGetterX, PostionGetter postionGetterO){
 		this.board = board;
 		this.refeere = refeere;
 		this.printer = printer;
-		this.postionGetter = postionGetter;
+		this.postionGetterX = postionGetterX;
+		this.postionGetterO = postionGetterO;
 		
 		movement = new Movement(TicTacToeType.X);	
 	}
@@ -38,9 +40,19 @@ public class TicTacToeGame {
 			
 			Printer printer = new TicPrinter(board);
 			
-			PostionGetter postionGetter = new Positioner();
+			PostionGetter humanGetter = new Positioner();
 			
-			TicTacToeGame tg = new TicTacToeGame(board, refeere, printer,  postionGetter);
+			PostionGetter cpomuter = new PostionGetter() {
+				
+				@Override
+				public Position getPosition() {
+					 int x = (int) (Math.random()*3);
+					 int y = (int) (Math.random()*3);
+					return new CellPosition(x, y);
+				}
+			};
+			
+			TicTacToeGame tg = new TicTacToeGame(board, refeere, printer,  humanGetter, cpomuter);
 			
 			tg.startGame();
 		}
@@ -49,7 +61,7 @@ public class TicTacToeGame {
 	
 	
 	public void startGame() {
-		while(!board.isFull() && !refeere.isWin()) {
+		while(!refeere.isWin() &&!board.isFull()  ) {
 					
 			if (movement.getMove() == TicTacToeType.X) {
 				moveX();
@@ -67,13 +79,9 @@ public class TicTacToeGame {
 
 	private void moveO() {
 		Position position;
-		int x;
-		int y;
+		
 		do {
-			 x = (int) (Math.random()*3);
-			 y = (int) (Math.random()*3);
-			 
-			 position = new CellPosition(x,y);
+			 position = postionGetterO.getPosition();
 			
 			if( !board.getCell(position).isUsed() ) {
 				board.setTicO(position);
@@ -89,7 +97,7 @@ public class TicTacToeGame {
 	private void moveX() {
 		Position position;
 		do {
-			position = postionGetter.getPosition();
+			position = postionGetterX.getPosition();
 			
 			if(!board.getCell(position).isUsed()) {
 				board.setTicX(position);
