@@ -1,50 +1,52 @@
 package com.mmc.tiktaktoe;
 
 public class TicTacToeBoard implements Board {
-	Cell[][] fields;
+	Cell[][] cells;
 	
 	public TicTacToeBoard() {
 		createFields();
 	}
 
 	private void createFields() {
-		fields = new TicTacToeCell[3][];
+		cells = new TicTacToeCell[3][];
 		
 		for (int i = 0; i < 3; i++) {
-			fields[i] = new TicTacToeCell[3];
+			cells[i] = new TicTacToeCell[3];
 			
 			for (int k = 0; k < 3; k++) {
-				TicTacToeCell field = new TicTacToeCell();
-				field.setCellAs((i+1) + "" + (k+1));
-				fields[i][k] = field;
+				TicTacToeCell cell = new TicTacToeCell();
+				cells[i][k] = cell;
 			}
-			
 		}
-		
 	}
 	
-
 	@Override
-	public Cell[][] getTics() {
-		return fields;
+	public Cell[][] getCells() {
+		return cells;
 	}
 
 	@Override
 	public boolean setTicX(int i, int k) {
-		if (!fields[i][k].isUsed()) {
-			fields[i][k].setCellAs("x");
-			return true;
-		}
-		return false;
+		return cells[i][k].setAsX();
 	}
 
 	@Override
 	public boolean setTicO(int i, int k) {
-		if (!fields[i][k].isUsed()) {
-			fields[i][k].setCellAs("o");
-			return true;
+		return cells[i][k].setAsO();
+	}
+
+	@Override
+	public boolean isFull() {
+		for (Cell[] celllist : cells) {
+		
+			for (Cell cell : celllist) {
+				if ( !cell.isUsed() ) return false;
+			}
+			
 		}
-		return false;
+		
+		
+		return true;
 	}
 	
 }
