@@ -1,5 +1,7 @@
 package com.mmc.tiktaktoe;
 
+import com.mmc.tiktaktoe.abstraction.Cell;
+
 public class TicTacToeCell implements Cell{
 	TicTacToeType type;
 	

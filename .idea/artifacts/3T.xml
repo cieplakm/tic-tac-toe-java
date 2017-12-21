@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="3T">
+    <output-path>$PROJECT_DIR$/out/artifacts/3T</output-path>
+    <root id="archive" name="3T.jar">
+      <element id="module-output" name="tic-tac-toe-jee" />
+    </root>
+  </artifact>
+</component>

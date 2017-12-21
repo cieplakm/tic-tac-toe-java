@@ -4,6 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import com.mmc.tiktaktoe.abstraction.Board;
+import com.mmc.tiktaktoe.abstraction.Mover;
+import com.mmc.tiktaktoe.abstraction.Position;
+import com.mmc.tiktaktoe.abstraction.PostionProvider;
+import com.mmc.tiktaktoe.abstraction.Printer;
+import com.mmc.tiktaktoe.abstraction.Refeere;
 import com.mmc.tiktaktoe.rules.DiagonalRule;
 import com.mmc.tiktaktoe.rules.HorizontalRule;
 import com.mmc.tiktaktoe.rules.VerticalRule;
@@ -12,18 +18,22 @@ public class TicTacToeGame {
 	Board board;
 	Refeere refeere;
 	Printer printer;
-	PostionGetter postionGetterO;
-	PostionGetter postionGetterX;
-	Movement movement;
+	PostionProvider postionGetterO;
+	PostionProvider postionGetterX;
+	Mover mover;
 	
-	TicTacToeGame(Board board, Refeere refeere, Printer printer, PostionGetter postionGetterX, PostionGetter postionGetterO){
+	public TicTacToeGame(Board board, Refeere refeere, 
+			Printer printer, 
+			PostionProvider postionGetterX, 
+			PostionProvider postionGetterO, 
+			Mover movement){
 		this.board = board;
 		this.refeere = refeere;
 		this.printer = printer;
 		this.postionGetterX = postionGetterX;
 		this.postionGetterO = postionGetterO;
+		this.mover = movement;
 		
-		movement = new Movement(TicTacToeType.X);	
 	}
 	
 	
@@ -33,17 +43,23 @@ public class TicTacToeGame {
 		while (true) {
 			Board board = new TicTacToeBoard();
 			
-			Refeere refeere = new TicRefeere(board);
+			Refeere refeere = new TicTacToeRefeere(board);
 			refeere.addRule(new HorizontalRule());
 			refeere.addRule(new VerticalRule());
 			refeere.addRule(new DiagonalRule());
+
+			refeere.setOnWinListener(new Refeere.OnWinListener() {
+				@Override
+				public void onWin(TicTacToeType who) {
+					
+				}
+			});
 			
-			Printer printer = new TicPrinter(board);
+			Printer printer = new TicTacToePrinter(board);
 			
-			PostionGetter humanGetter = new Positioner();
+			PostionProvider human = new HummanProvider();
 			
-			PostionGetter cpomuter = new PostionGetter() {
-				
+			PostionProvider computer = new PostionProvider() {
 				@Override
 				public Position getPosition() {
 					 int x = (int) (Math.random()*3);
@@ -52,69 +68,22 @@ public class TicTacToeGame {
 				}
 			};
 			
-			TicTacToeGame tg = new TicTacToeGame(board, refeere, printer,  humanGetter, cpomuter);
+			Mover movement = new TicTacToeMover(board);
 			
-			tg.startGame();
+			
+
+
 		}
 		
 	}
 	
 	
-	public void startGame() {
-		while(!refeere.isWin() &&!board.isFull()  ) {
-					
-			if (movement.getMove() == TicTacToeType.X) {
-				moveX();
-			}else {
-				moveO();
-			}
-			
-			printer.print();
-				
-		}
-				
-				
-		System.out.println("KONIEC!");
-	}
 
-	private void moveO() {
-		Position position;
-		
-		do {
-			 position = postionGetterO.getPosition();
-			
-			if( !board.getCell(position).isUsed() ) {
-				board.setTicO(position);
-				break;
-			}
-			
-		}while( board.getCell(position).isUsed() );
-		
-		movement.moved();
-		
-	}
+	
+	
+	
 
-	private void moveX() {
-		Position position;
-		do {
-			position = postionGetterX.getPosition();
-			
-			if(!board.getCell(position).isUsed()) {
-				board.setTicX(position);
-				break;
-			}
-			
-		} while( board.getCell(position).isUsed() );
-		
-		
-		movement.moved();
-		
-	}
-	
-	
-	
-	
-	
+
 
 
 }

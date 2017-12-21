@@ -1,6 +1,6 @@
 package com.mmc.tiktaktoe.rules;
 
-import com.mmc.tiktaktoe.Cell;
+import com.mmc.tiktaktoe.abstraction.Cell;
 
 public class DiagonalRule implements Rule {
 

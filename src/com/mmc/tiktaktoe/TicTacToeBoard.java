@@ -1,5 +1,9 @@
 package com.mmc.tiktaktoe;
 
+import com.mmc.tiktaktoe.abstraction.Board;
+import com.mmc.tiktaktoe.abstraction.Cell;
+import com.mmc.tiktaktoe.abstraction.Position;
+
 public class TicTacToeBoard implements Board {
 	Cell[][] cells;
 	

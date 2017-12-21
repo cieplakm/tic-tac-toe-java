@@ -1,5 +1,7 @@
 package com.mmc.tiktaktoe;
 
+import com.mmc.tiktaktoe.abstraction.Position;
+
 public class CellPosition implements Position {
 	int[] data;
 
