@@ -6,4 +6,5 @@ public interface Board {
 	Cell getCell(Position position);
 	boolean setTicX(Position position);
 	boolean setTicO(Position position);
+	void resetFields();
 }

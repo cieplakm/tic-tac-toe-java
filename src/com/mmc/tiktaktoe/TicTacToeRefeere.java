@@ -3,7 +3,6 @@ package com.mmc.tiktaktoe;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.mmc.tiktaktoe.abstraction.Board;
 import com.mmc.tiktaktoe.abstraction.Cell;
 import com.mmc.tiktaktoe.abstraction.Refeere;
@@ -11,11 +10,14 @@ import com.mmc.tiktaktoe.rules.Rule;
 
 public class TicTacToeRefeere implements Refeere {
 	private List<Rule> rules;
-	private Cell[][] cells;
+	private Board board;
+	private int xResult;
+	private int oResult;
 	private OnWinListener onWinListener;
 
 	public TicTacToeRefeere(Board board) {
-		this.cells = board.getCells();
+		this.board = board;
+
 		rules = new ArrayList<>();
 	}
 
@@ -25,14 +27,13 @@ public class TicTacToeRefeere implements Refeere {
 	}
 
 	@Override
-	public boolean isWin() {
+	public boolean checkIfSomeoneWon() {
 		
 		for (Rule rule : rules) {
-			Cell wonCell = rule.qualify(cells);
+			Cell wonCell = rule.qualify(board.getCells());
 			
-			if(  wonCell != null) {
-				
-				System.out.println("WIN! " + wonCell.getType() + "!");
+			if(  wonCell != null ) {
+				win(wonCell);
 				return true;
 			}
 		}
@@ -40,10 +41,36 @@ public class TicTacToeRefeere implements Refeere {
 		return false;
 	}
 
+	private void win(Cell wonCell) {
+
+		if (wonCell.isO()){
+			incrementO();
+		}else{
+			incrementX();
+		}
+
+		if (onWinListener != null){
+			onWinListener.onWin(wonCell);
+		}
+	}
+
+	private void incrementX(){
+		xResult++;
+	}
+
+	private void incrementO(){
+		oResult++;
+	}
+
+
 	@Override
-	public String whoWon() {
-		// TODO Auto-generated method stub
-		return null;
+	public int resultX() {
+		return xResult;
+	}
+
+	@Override
+	public int resultO() {
+		return oResult;
 	}
 
 	@Override

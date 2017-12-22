@@ -8,10 +8,10 @@ public class TicTacToeBoard implements Board {
 	Cell[][] cells;
 	
 	public TicTacToeBoard() {
-		createFields();
+		resetFields();
 	}
 
-	private void createFields() {
+	public void resetFields() {
 		cells = new TicTacToeCell[3][];
 		
 		for (int i = 0; i < 3; i++) {

@@ -4,13 +4,15 @@ import com.mmc.tiktaktoe.TicTacToeType;
 import com.mmc.tiktaktoe.rules.Rule;
 
 public interface Refeere {
-	public interface OnWinListener {
-		void onWin(TicTacToeType who);
+
+	interface OnWinListener{
+		void onWin(Cell wonCell);
 	}
 
 	void addRule(Rule rule);
-	boolean isWin();
-	String whoWon();
+	boolean checkIfSomeoneWon();
+	int resultX();
+	int resultO();
 	void setOnWinListener(OnWinListener onWinListener);
 
 

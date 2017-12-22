@@ -3,11 +3,14 @@ package com.mmc.tiktaktoe;
 import com.mmc.tiktaktoe.abstraction.Board;
 import com.mmc.tiktaktoe.abstraction.Mover;
 import com.mmc.tiktaktoe.abstraction.Position;
+import com.mmc.tiktaktoe.abstraction.Refeere;
 
 public class TicTacToeMover implements Mover{
 	TicTacToeType actual;
 	Board board;
-	
+	OnMoveListener onMoveListener;
+
+
 	public TicTacToeMover(Board board) {
 		actual = TicTacToeType.O;
 		this.board =  board;
@@ -16,7 +19,12 @@ public class TicTacToeMover implements Mover{
 	public void startFrom(TicTacToeType starter) {
 		actual = starter;
 	}
-	
+
+	@Override
+	public void setOnMoveListener(OnMoveListener onMoveListener) {
+        this.onMoveListener = onMoveListener;
+    }
+
 	public TicTacToeType getTurn() {
 		
 		if(actual == TicTacToeType.X) {
@@ -29,13 +37,14 @@ public class TicTacToeMover implements Mover{
 	
 	public boolean move(Position position) {
 		boolean isRight = false;
-		
+
 		if(actual == TicTacToeType.X) {
 			isRight = moveAsX(position);
 		}else {
 			isRight = moveAsO(position);
 		}
-		
+
+
 		if (isRight) {
 			changeTurn();
 		}
@@ -58,11 +67,16 @@ public class TicTacToeMover implements Mover{
 	}
 
 	private void changeTurn() {
+
 		if(actual == TicTacToeType.X) {
 			actual = TicTacToeType.O;
 		}else {
 			actual = TicTacToeType.X;
 		}
+
+        if (onMoveListener != null)
+            onMoveListener.onMove();
+
 	}
 	
 }
