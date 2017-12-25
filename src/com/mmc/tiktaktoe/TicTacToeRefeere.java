@@ -14,6 +14,7 @@ public class TicTacToeRefeere implements Refeere {
 	private int xResult;
 	private int oResult;
 	private OnWinListener onWinListener;
+	private boolean won;
 
 	public TicTacToeRefeere(Board board) {
 		this.board = board;
@@ -41,6 +42,11 @@ public class TicTacToeRefeere implements Refeere {
 		return false;
 	}
 
+	@Override
+	public boolean isWon() {
+		return won;
+	}
+
 	private void win(Cell wonCell) {
 
 		if (wonCell.isO()){
@@ -49,9 +55,12 @@ public class TicTacToeRefeere implements Refeere {
 			incrementX();
 		}
 
+		won = true;
+
 		if (onWinListener != null){
 			onWinListener.onWin(wonCell);
 		}
+
 	}
 
 	private void incrementX(){
@@ -76,6 +85,11 @@ public class TicTacToeRefeere implements Refeere {
 	@Override
 	public void setOnWinListener(OnWinListener onWinListener) {
 		this.onWinListener = onWinListener;
+	}
+
+	@Override
+	public void reset() {
+		won = false;
 	}
 
 

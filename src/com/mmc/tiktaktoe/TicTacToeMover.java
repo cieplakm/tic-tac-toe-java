@@ -7,6 +7,7 @@ import com.mmc.tiktaktoe.abstraction.Refeere;
 
 public class TicTacToeMover implements Mover{
 	TicTacToeType actual;
+	TicTacToeType starter;
 	Board board;
 	OnMoveListener onMoveListener;
 
@@ -18,6 +19,7 @@ public class TicTacToeMover implements Mover{
 	
 	public void startFrom(TicTacToeType starter) {
 		actual = starter;
+		this.starter = starter;
 	}
 
 	@Override
@@ -27,14 +29,15 @@ public class TicTacToeMover implements Mover{
 
 	public TicTacToeType getTurn() {
 		
-		if(actual == TicTacToeType.X) {
-			return TicTacToeType.O;
-		}else {
-			return TicTacToeType.X;
-		}
+		return actual;
 		
 	}
-	
+
+	@Override
+	public void reset() {
+		actual = starter;
+	}
+
 	public boolean move(Position position) {
 		boolean isRight = false;
 

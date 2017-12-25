@@ -7,5 +7,6 @@ public interface Cell {
 	boolean setAsX();
 	boolean setAsO();
 	String getType();
-	
+	boolean isTakePartOfWon();
+	void setTakePartOfWon(boolean is);
 }

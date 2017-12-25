@@ -9,6 +9,7 @@ public interface Mover {
 
 	boolean move(Position position);
 	TicTacToeType getTurn();
+	void reset();
 	void startFrom(TicTacToeType starter);
 	void setOnMoveListener(OnMoveListener onMoveListener);
 }

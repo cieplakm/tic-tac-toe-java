@@ -10,6 +10,9 @@ public class HorizontalRule implements Rule {
 		for (Cell[] array : tickArray) {
 			if( array[0].equals( array[1] )  &&  array[1].equals( array[2] ) ) {
 				System.out.println("Horisontal");
+				array[0].setTakePartOfWon(true);
+				array[1].setTakePartOfWon(true);
+				array[2].setTakePartOfWon(true);
 				return array[0];
 			}
 		}
