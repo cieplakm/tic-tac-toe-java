@@ -14,6 +14,7 @@ public class TicTacToeMover implements Mover{
 
 	public TicTacToeMover(Board board) {
 		actual = TicTacToeType.O;
+		this.starter = TicTacToeType.O;
 		this.board =  board;
 	}
 	
@@ -35,7 +36,17 @@ public class TicTacToeMover implements Mover{
 
 	@Override
 	public void reset() {
+		turnStarter();
 		actual = starter;
+
+	}
+
+	private void turnStarter() {
+		if (starter == TicTacToeType.X){
+			starter = TicTacToeType.O;
+		}else {
+			starter = TicTacToeType.X;
+		}
 	}
 
 	public boolean move(Position position) {
